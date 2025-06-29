@@ -6,6 +6,11 @@
 <body>
 <h2>Lista de Préstamos</h2>
 
+<!-- Botón para ir al registro de prestamos -->
+<form th:action="@{/inicio/prestamos/registro}" method="get">
+    <button type="submit">Crear un prestamo</button>
+</form>
+
 <table border="1">
     <thead>
     <tr>

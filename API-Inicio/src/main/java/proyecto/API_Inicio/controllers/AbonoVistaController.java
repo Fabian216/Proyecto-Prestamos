@@ -17,17 +17,6 @@ public class AbonoVistaController {
     @Autowired
     private AbonoClient abonoClient;
 
-    /*@GetMapping("/{prestamoId}")
-    public String listarAbonosPorPrestamo(@PathVariable Integer prestamoId, Model model, HttpSession session) {
-        String token = (String) session.getAttribute("jwt");
-        if (token == null) {
-            return "redirect:/inicio/login?sessionExpired=true";
-        }
-
-        List<AbonoResponse> abonos = abonoClient.obtenerAbonosPorPrestamo(prestamoId);
-        model.addAttribute("abonos", abonos);
-        return "abonos"; //vista abonos
-    }*/
     @GetMapping("/{prestamoId}")
     public String listarAbonosPorPrestamo(@PathVariable Integer prestamoId, Model model, HttpSession session) {
         String token = (String) session.getAttribute("jwt");
@@ -61,6 +50,5 @@ public class AbonoVistaController {
             return "abonos";
         }
     }
-
 
 }

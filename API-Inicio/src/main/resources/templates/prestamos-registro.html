@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Préstamo</title>
+</head>
+<body>
+<h2>Registrar Préstamo</h2>
+
+<form th:action="@{/inicio/prestamos/crear}" th:object="${prestamoRequest}" method="post">
+    <label>Monto:</label>
+    <input type="number" step="0.01" th:field="*{monto}" required /><br/>
+
+    <label>Fecha del Préstamo:</label>
+    <input type="date" th:field="*{fechaPrestamo}" required /><br/>
+
+    <label>Cliente:</label>
+    <select th:field="*{clienteId}" required>
+        <option th:each="cliente : ${clientes}"
+                th:value="${cliente.id}"
+                th:text="${cliente.nombres + ' ' + cliente.apellidos + ' - ' + cliente.dni}">
+        </option>
+    </select><br/>
+
+    <button type="submit">Registrar</button>
+</form>
+
+<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+<a th:href="@{/inicio/prestamos}">← Volver a la lista de préstamos</a>
+</body>
+</html>
