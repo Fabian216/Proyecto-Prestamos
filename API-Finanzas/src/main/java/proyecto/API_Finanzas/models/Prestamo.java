@@ -23,6 +23,9 @@ public class Prestamo {
 
     private BigDecimal monto;
 
+    @Column(name = "restante")
+    private BigDecimal restante;
+
     @Column(name = "fecha_prestamo")
     private LocalDate fechaPrestamo;
 

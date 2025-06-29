@@ -7,7 +7,9 @@ import proyecto.API_Finanzas.dto.AbonoResponse;
 import proyecto.API_Finanzas.models.Abono;
 import proyecto.API_Finanzas.models.Prestamo;
 import proyecto.API_Finanzas.services.AbonoService;
+import proyecto.API_Finanzas.services.PrestamoService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,9 @@ public class AbonoController {
 
     @Autowired
     private AbonoService abonoService;
+
+    @Autowired
+    private PrestamoService prestamoService;
 
     @GetMapping
     public Iterable<Abono> listarAbonos() {
@@ -42,20 +47,34 @@ public class AbonoController {
         }).toList();
     }
 
-
     @PostMapping
     public Abono registrar(@RequestBody AbonoRequest request) {
-        Prestamo prestamo = new Prestamo();
-        prestamo.setId(request.getPrestamoId());
+        Optional<Prestamo> optional = prestamoService.obtenerPrestamoPorId(request.getPrestamoId());
+
+        if (optional.isEmpty()) {
+            throw new RuntimeException("Préstamo no encontrado");
+        }
+
+        Prestamo prestamo = optional.get();
 
         Abono abono = new Abono();
         abono.setBanco(request.getBanco());
         abono.setMonto(request.getMonto());
         abono.setFechaAbono(request.getFechaAbono());
-        abono.setPrestamo(prestamo); // solo seteamos el id
+        abono.setPrestamo(prestamo);
 
-        return abonoService.guardarAbono(abono);
+        // Registrar abono
+        Abono abonoGuardado = abonoService.guardarAbono(abono);
+
+        // Actualizar el campo restante
+        BigDecimal nuevoRestante = prestamo.getRestante().subtract(abono.getMonto());
+        prestamo.setRestante(nuevoRestante.max(BigDecimal.ZERO)); // evitar negativos
+
+        prestamoService.guardarPrestamo(prestamo); // actualizar el préstamo
+
+        return abonoGuardado;
     }
+
 
     @PutMapping("/{id}")
     public Abono actualizar(@PathVariable Integer id, @RequestBody Abono abono) {

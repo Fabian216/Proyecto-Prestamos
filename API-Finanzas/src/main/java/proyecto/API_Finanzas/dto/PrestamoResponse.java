@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class PrestamoResponse {
     private Integer id;
     private BigDecimal monto;
+    private BigDecimal restante;
     private LocalDate fechaPrestamo;
     private Integer clienteId;
     private String clienteDni;

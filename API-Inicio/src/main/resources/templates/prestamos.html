@@ -16,6 +16,7 @@
     <tr>
         <th>ID</th>
         <th>Monto</th>
+        <th>restante</th>
         <th>Fecha</th>
         <th>Cliente</th>
         <th>Acciones</th>
@@ -25,6 +26,7 @@
     <tr th:each="prestamo : ${prestamos}">
         <td th:text="${prestamo.id}"></td>
         <td th:text="${prestamo.monto}"></td>
+        <td th:text="${prestamo.restante}"></td>
         <td th:text="${prestamo.fechaPrestamo}"></td>
         <td th:text="${prestamo.clienteNombres} + ' ' + ${prestamo.clienteApellidos} + ' (DNI: ' + ${prestamo.clienteDni} + ')'"></td>
         <td>

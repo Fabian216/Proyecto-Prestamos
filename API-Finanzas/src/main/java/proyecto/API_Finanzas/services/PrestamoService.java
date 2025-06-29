@@ -30,6 +30,9 @@ public class PrestamoService {
     }
 
     public Prestamo guardarPrestamo(Prestamo prestamo) {
+        if (prestamo.getId() == null) {
+            prestamo.setRestante(prestamo.getMonto()); // al crear el restante será = monto
+        }
         return prestamoRepository.save(prestamo);
     }
 
@@ -44,6 +47,7 @@ public class PrestamoService {
         for (Prestamo p : prestamos) {
             PrestamoResponse dto = new PrestamoResponse();
             dto.setId(p.getId());
+            dto.setRestante(p.getRestante());
             dto.setMonto(p.getMonto());
             dto.setFechaPrestamo(p.getFechaPrestamo());
 
