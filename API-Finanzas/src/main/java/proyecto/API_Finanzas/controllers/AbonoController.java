@@ -49,32 +49,17 @@ public class AbonoController {
 
     @PostMapping
     public Abono registrar(@RequestBody AbonoRequest request) {
-        Optional<Prestamo> optional = prestamoService.obtenerPrestamoPorId(request.getPrestamoId());
-
-        if (optional.isEmpty()) {
-            throw new RuntimeException("Préstamo no encontrado");
-        }
-
-        Prestamo prestamo = optional.get();
+        Prestamo prestamo = new Prestamo();
+        prestamo.setId(request.getPrestamoId());
 
         Abono abono = new Abono();
         abono.setBanco(request.getBanco());
         abono.setMonto(request.getMonto());
         abono.setFechaAbono(request.getFechaAbono());
-        abono.setPrestamo(prestamo);
+        abono.setPrestamo(prestamo); // solo seteamos el ID
 
-        // Registrar abono
-        Abono abonoGuardado = abonoService.guardarAbono(abono);
-
-        // Actualizar el campo restante
-        BigDecimal nuevoRestante = prestamo.getRestante().subtract(abono.getMonto());
-        prestamo.setRestante(nuevoRestante.max(BigDecimal.ZERO)); // evitar negativos
-
-        prestamoService.guardarPrestamo(prestamo); // actualizar el préstamo
-
-        return abonoGuardado;
+        return abonoService.guardarAbonoConActualizacion(abono);
     }
-
 
     @PutMapping("/{id}")
     public Abono actualizar(@PathVariable Integer id, @RequestBody Abono abono) {
