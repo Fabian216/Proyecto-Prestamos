@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Abonos</title>
+</head>
+<body>
+<h2>Lista de Abonos</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Banco</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+    </tr>
+    <tr th:each="abono : ${abonos}">
+        <td th:text="${abono.id}">1</td>
+        <td th:text="${abono.banco}">Banco</td>
+        <td th:text="${abono.monto}">1000.00</td>
+        <td th:text="${abono.fechaAbono}">2024-06-01</td>
+    </tr>
+</table>
+
+<a th:href="@{/inicio/prestamos}">← Volver a Préstamos</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Préstamos</title>
+</head>
+<body>
+<h2>Lista de Préstamos</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prestamo : ${prestamos}">
+        <td th:text="${prestamo.id}"></td>
+        <td th:text="${prestamo.monto}"></td>
+        <td th:text="${prestamo.fechaPrestamo}"></td>
+        <td th:text="${prestamo.clienteNombres} + ' ' + ${prestamo.clienteApellidos} + ' (DNI: ' + ${prestamo.clienteDni} + ')'"></td>
+        <td>
+            <form th:action="@{/inicio/abonos/{id}(id=${prestamo.id})}" method="get">
+                <button type="submit">ver abonos</button>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<!-- Botón para ir al inicio -->
+<form th:action="@{/inicio/home}" method="get">
+    <button type="submit">Ir al inicio</button>
+</form>
+
+</body>
+</html>

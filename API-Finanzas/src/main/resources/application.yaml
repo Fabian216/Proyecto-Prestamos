@@ -1,0 +1,25 @@
+spring:
+ application:
+   name: API-Finanzas
+
+ datasource:
+   url: jdbc:mysql://localhost:3306/proyecto_finanzas
+   username: root
+   password: 123456
+   driver-class-name: com.mysql.cj.jdbc.Driver
+
+ jpa:
+   hibernate:
+     ddl-auto: none
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8085

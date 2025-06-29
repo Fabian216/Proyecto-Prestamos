@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: API-Inicio
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 60000
+            read-timeout: 10000
+    loadbalancer:
+      cache:
+        enabled: false
+      retry:
+        enabled: true
+        max-entries-on-next-service-instance: 2
+        max-entries-on-same-service-instance: 1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8084

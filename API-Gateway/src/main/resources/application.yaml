@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: API-Gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          routes:
+            - id: API-Security
+              uri: lb://API-Security
+              predicates:
+                - Path=/auth/**
+            - id: API-Inicio
+              uri: lb://API-Inicio
+              predicates:
+                - Path=/inicio/**
+            - id: API-Finanzas
+              uri: lb://API-Finanzas
+              predicates:
+                - Path=/prestamos/**, /clientes/**, /abonos/**
+
+server:
+  port: 8082
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      access: read-only
+  endpoints:
+    web:
+      exposure:
+        include: health,gateway
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

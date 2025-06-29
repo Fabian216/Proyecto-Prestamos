@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Inicio</title>
+</head>
+<body>
+<h2>Bienvenido al Sistema</h2>
+<p>Has iniciado sesión correctamente.</p>
+
+<!-- Botón para ir a la lista de préstamos -->
+<form th:action="@{/inicio/prestamos}" method="get">
+  <button type="submit">Ver Préstamos</button>
+</form>
+
+<!-- Botón para cerrar sesión -->
+<form th:action="@{/inicio/logout}" method="post">
+  <button type="submit">Cerrar sesión</button>
+</form>
+
+</body>
+</html>
