@@ -7,6 +7,10 @@
 <h2>Bienvenido al Sistema</h2>
 <p>Has iniciado sesión correctamente.</p>
 
+<form th:action="@{/inicio/clientes}" method="get">
+  <button type="submit">Ver Clientes</button>
+</form>
+
 <!-- Botón para ir a la lista de préstamos -->
 <form th:action="@{/inicio/prestamos}" method="get">
   <button type="submit">Ver Préstamos</button>

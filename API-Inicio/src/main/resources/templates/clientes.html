@@ -1,0 +1,49 @@
+<!-- clientes.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clientes</title>
+</head>
+<body>
+
+<h2>Listado de Clientes</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>DNI</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Email</th>
+        <th>Celular</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.dni}"></td>
+        <td th:text="${cliente.nombres}"></td>
+        <td th:text="${cliente.apellidos}"></td>
+        <td th:text="${cliente.email}"></td>
+        <td th:text="${cliente.celular}"></td>
+        <td>
+            <a th:href="@{/inicio/clientes/editar/{id}(id=${cliente.id})}">
+                <button>Editar datos</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/inicio/clientes/registro}">
+    <button>Registrar Nuevo Cliente</button>
+</a>
+
+<!-- Botón para ir al inicio -->
+<form th:action="@{/inicio/home}" method="get">
+    <button type="submit">Ir al inicio</button>
+</form>
+
+</body>
+</html>

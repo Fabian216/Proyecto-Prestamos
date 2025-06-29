@@ -2,9 +2,11 @@ package proyecto.API_Finanzas.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import proyecto.API_Finanzas.dto.ClienteResponse;
 import proyecto.API_Finanzas.models.Cliente;
 import proyecto.API_Finanzas.services.ClienteService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -40,4 +42,8 @@ public class ClienteController {
         clienteService.eliminarCliente(id);
     }
 
+    @GetMapping("/dto")
+    public List<ClienteResponse> listarDTO() {
+        return clienteService.listarClientesDTO();
+    }
 }
