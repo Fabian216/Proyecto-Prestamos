@@ -2,34 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Editar Cliente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+        crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-light">
 
-<h2>Editar Cliente</h2>
+<!-- Cabecera reutilizable -->
+<div th:insert="fragments/cabecera :: navbar"></div>
 
-<form th:action="@{/inicio/clientes/actualizar/{id}(id=${clienteId})}" th:object="${clienteRequest}" method="post">
-  <label>DNI:</label>
-  <input type="text" th:field="*{dni}" required/><br>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Editar Cliente</h4>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/inicio/clientes/actualizar/{id}(id=${clienteId})}"
+            th:object="${clienteRequest}" method="post">
 
-  <label>Nombres:</label>
-  <input type="text" th:field="*{nombres}" required/><br>
+        <div class="mb-3">
+          <label class="form-label">DNI:</label>
+          <input type="text" class="form-control" th:field="*{dni}" required/>
+        </div>
 
-  <label>Apellidos:</label>
-  <input type="text" th:field="*{apellidos}" required/><br>
+        <div class="mb-3">
+          <label class="form-label">Nombres:</label>
+          <input type="text" class="form-control" th:field="*{nombres}" required/>
+        </div>
 
-  <label>Email:</label>
-  <input type="email" th:field="*{email}" required/><br>
+        <div class="mb-3">
+          <label class="form-label">Apellidos:</label>
+          <input type="text" class="form-control" th:field="*{apellidos}" required/>
+        </div>
 
-  <label>Celular:</label>
-  <input type="text" th:field="*{celular}" required/><br>
+        <div class="mb-3">
+          <label class="form-label">Email:</label>
+          <input type="email" class="form-control" th:field="*{email}" required/>
+        </div>
 
-  <button type="submit">Actualizar</button>
-</form>
+        <div class="mb-3">
+          <label class="form-label">Celular:</label>
+          <input type="text" class="form-control" th:field="*{celular}" required/>
+        </div>
 
-<!-- Botón para regresar a clientes -->
-<form th:action="@{/inicio/clientes}" method="get">
-  <button type="submit">Cancelar</button>
-</form>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <a th:href="@{/inicio/clientes}" class="btn btn-secondary">Cancelar</a>
+        </div>
 
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
 </body>
 </html>

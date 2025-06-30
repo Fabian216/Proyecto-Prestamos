@@ -1,49 +1,59 @@
-<!-- clientes.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Clientes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+          crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-light">
 
-<h2>Listado de Clientes</h2>
+<!-- Cabecera reutilizable -->
+<div th:insert="fragments/cabecera :: navbar"></div>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>DNI</th>
-        <th>Nombres</th>
-        <th>Apellidos</th>
-        <th>Email</th>
-        <th>Celular</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="cliente : ${clientes}">
-        <td th:text="${cliente.dni}"></td>
-        <td th:text="${cliente.nombres}"></td>
-        <td th:text="${cliente.apellidos}"></td>
-        <td th:text="${cliente.email}"></td>
-        <td th:text="${cliente.celular}"></td>
-        <td>
-            <a th:href="@{/inicio/clientes/editar/{id}(id=${cliente.id})}">
-                <button>Editar datos</button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Listado de Clientes</h2>
+        <a th:href="@{/inicio/clientes/registro}" class="btn btn-success">
+            + Registrar Nuevo Cliente
+        </a>
+    </div>
 
-<br>
-<a th:href="@{/inicio/clientes/registro}">
-    <button>Registrar Nuevo Cliente</button>
-</a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark text-center">
+            <tr>
+                <th>DNI</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.dni}"></td>
+                <td th:text="${cliente.nombres}"></td>
+                <td th:text="${cliente.apellidos}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td th:text="${cliente.celular}"></td>
+                <td class="text-center">
+                    <a th:href="@{/inicio/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-sm btn-outline-primary">
+                        Editar datos
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<!-- Botón para ir al inicio -->
-<form th:action="@{/inicio/home}" method="get">
-    <button type="submit">Ir al inicio</button>
-</form>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
 </body>
 </html>
