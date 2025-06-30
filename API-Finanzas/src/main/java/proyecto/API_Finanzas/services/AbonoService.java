@@ -16,6 +16,9 @@ public class AbonoService {
     @Autowired
     private AbonoRepository abonoRepository;
 
+    @Autowired
+    private PrestamoService prestamoService;
+
     public Iterable<Abono> listarAbonos() {
         return abonoRepository.findAll();
     }
@@ -31,9 +34,6 @@ public class AbonoService {
     public Abono guardarAbono(Abono abono) {
         return abonoRepository.save(abono);
     }
-
-    @Autowired
-    private PrestamoService prestamoService;
 
     public Abono guardarAbonoConActualizacion(Abono abono) {
         // Obtener el préstamo original desde BD

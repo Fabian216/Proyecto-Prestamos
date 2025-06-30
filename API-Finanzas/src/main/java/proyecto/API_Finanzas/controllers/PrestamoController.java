@@ -46,7 +46,6 @@ public class PrestamoController {
         return prestamoService.guardarPrestamo(prestamo);
     }
 
-
     @PutMapping("/{id}")
     public Prestamo actualizar(@PathVariable Integer id, @RequestBody Prestamo prestamo) {
         prestamo.setId(id);
@@ -62,6 +61,5 @@ public class PrestamoController {
     public List<PrestamoResponse> listarDTO() {
         return prestamoService.listarPrestamosDTO();
     }
-
 
 }
